@@ -8,6 +8,15 @@ RUN wget https://developer.nvidia.com/embedded/dlc/l4t-gcc-toolchain-64-bit-28-3
 
 RUN mkdir cross_compiler && tar xvf gcc-4.8.5-aarch64.tgz -C cross_compiler
 
+RUN mkdir /hello_world
+
 COPY ./hello_world hello_world
+
+RUN mkdir /hello_world/build && \
+    cd /hello_world/build  && \
+    cmake .. && \ 
+    cmake --build .
+
+RUN mkdir /output
 
 ENTRYPOINT [ "/bin/bash" ]
